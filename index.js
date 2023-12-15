@@ -17,7 +17,7 @@ db.serialize(() => {
 
 app.post('/cats', (req, res) => {
   const name = req.body.name;
-  db.run(`INSERT INTO cats (name, votes) VALUES ('${name}', 0)`, function(err) {
+  db.run(`INSERT INTO cats (name, votes) VALUES (?, 0)`, name, function(err) {
     if (err) {
       res.status(500).send("Erro ao inserir no banco de dados");
     } else {
@@ -28,7 +28,7 @@ app.post('/cats', (req, res) => {
 
 app.post('/dogs', (req, res) => {
   const name = req.body.name;
-  db.run(`INSERT INTO dogs (name, votes) VALUES ('${name}', 0)`, function(err) {
+  db.run(`INSERT INTO dogs (name, votes) VALUES ('?, 0)`, name, function(err) {
     if (err) {
       res.status(500).send("Erro ao inserir no banco de dados");
     } else {
